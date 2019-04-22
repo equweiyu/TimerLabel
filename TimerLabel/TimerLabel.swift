@@ -8,21 +8,21 @@
 
 import UIKit
 
-@IBDesignable class TimerLabel: UILabel {
+@IBDesignable public class TimerLabel: UILabel {
     
-    @IBInspectable var autoHidden: Bool = false
-    @IBInspectable var autoStart: Bool = false
-    @IBInspectable var count: Int = 0
-    @IBInspectable var endText: String?
+    @IBInspectable public var autoHidden: Bool = false
+    @IBInspectable public var autoStart: Bool = false
+    @IBInspectable public var count: Int = 0
+    @IBInspectable public var endText: String?
     private var textNum: Int = 0
     
-    var timer: DispatchSourceTimer? = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
+    public var timer: DispatchSourceTimer? = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
     
-    func schedule() {
+    public func schedule() {
         timer?.schedule(deadline: DispatchTime.now(), repeating: DispatchTimeInterval.seconds(1))
     }
     
-    func setEventHandler(handler: ((TimerLabel)-> Void)? ) {
+    public func setEventHandler(handler: ((TimerLabel)-> Void)? ) {
         timer?.setEventHandler(handler: { [weak self] in
             if let self = self {
                 handler?(self)
@@ -50,15 +50,15 @@ import UIKit
         }
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         setup()
     }
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
